@@ -1,0 +1,11 @@
+CREATE DATABASE jdbc_teste;
+
+USE jdbc_teste;
+
+CREATE TABLE usuarios (
+id INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(50),
+idade VARCHAR(2)
+);
+
+select * from usuarios;
