@@ -1,19 +1,18 @@
-package teste_Banco;
+package usuarios;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.InputMismatchException; /* Exceção caso o tipo de data esteja incorreto */
 
-public class Usuarios {
+public class UsuarioForm {
 
 	public static Scanner input = new Scanner(System.in);
 	
 	// Dá acesso ao banco de dados
 	private Connection conexao;
-    public Usuarios(Connection conexao) {
+    public UsuarioForm(Connection conexao) {
         this.conexao = conexao;
     }
     
@@ -65,33 +64,11 @@ public class Usuarios {
 		stmt.setInt(4, adm);
 		stmt.executeUpdate();
 		System.out.println("Usuário adicionado com sucesso!");
-		listarUsuario();
 		
 	}
 	
-	public void listarUsuario() throws SQLException {
-		System.out.println("Usuários:");
-		String sql = "SELECT * FROM usuarios";
-		PreparedStatement stmt = conexao.prepareStatement(sql);
-		// Result set vai armazenar os resultados na variável
-		ResultSet resultado = stmt.executeQuery();
-		// Enquanto ainda existir uma linha o código vai rodar
-		while (resultado.next()) {
-			// Vai armazenar o valor de uma coluna em uma variável
-			int id = resultado.getInt("id");
-			String nome = resultado.getString("nome");
-			String email = resultado.getString("email");
-			String senha = resultado.getString("senha");
-			int adm = resultado.getInt("adm");
-			String tipo = "";
-			if (adm == 0) {
-				tipo = "comum";
-			} else {
-				tipo = "adm";
-			}
-			
-			// Vai mostrar todos os usuários apartir dessa variável
-			System.out.println("ID: " + id + "| Nome: " + nome + "| Email: " + email + "| Senha: " + senha + "| Tipo: " + tipo);
-		}
+	public void entrarUsuario() {
+		
 	}
+	
 }
