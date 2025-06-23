@@ -34,8 +34,9 @@ public class UsuarioList {
     	System.out.println("O que deseja fazer? "
     			+ "\n [1] Cadastrar novo usuário"
     			+ "\n [2] Visualizar todos usuários"
-    			+ "\n [3] Apagar usuário"
-    			+ "\n [4] Voltar");
+    			+ "\n [3] Editar usuário"
+    			+ "\n [4] Apagar usuário"
+    			+ "\n [5] Voltar");
 		
 		escolherAcao();
 	}
@@ -54,15 +55,31 @@ public class UsuarioList {
     		listarOpcoes();
     		break;
     	case 3:
+    		tipoEdicao();
+    		listarOpcoes();
+    	case 4:
     		usuarioF.apagarUsuario();
     		listarOpcoes();
     		break;
-    	case 4:
+    	case 5:
     		home.conectarBanco();
     		break;
     		default:
 				System.out.println("Escolha uma das opções");
 
+    	}
+    }
+    
+    public void tipoEdicao() throws SQLException {
+    	System.out.println("Como deseja editar?"
+    			+ "\n [1] Tudo"
+    			+ "\n [2] Apenas um elemento da tabela");
+    	int escolha = escolha();
+    	
+    	if (escolha == 1) {
+    		usuarioF.editarTudoUsuario();
+    	} else {
+    		usuarioF.editarParteUsuario();
     	}
     }
     

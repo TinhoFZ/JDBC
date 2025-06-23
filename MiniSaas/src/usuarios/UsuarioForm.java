@@ -81,11 +81,110 @@ public class UsuarioForm {
 		
 	}
 	
+	// Usuário vai escolher o que editar
+	public String escolherEdicao() {
+		String editar = "";
+		System.out.println("O que deseja editar?"
+				+ "\n [1] Nome"
+				+ "\n [2] Email"
+				+ "\n [3] Senha"
+				+ "\n [4] Tipo");
+		try {
+			int escolha = input.nextInt();
+			input.nextLine();
+			switch (escolha) {
+			case 1:
+				editar = "nome";
+				break;
+			case 2:
+				editar = "email";
+				break;
+			case 3:
+				editar = "senha";
+				break;
+			case 4:
+				editar = "adm";
+				break;
+				default:
+					System.out.println("Escolha uma das opções");
+			}
+		} catch (InputMismatchException e) {
+			System.out.println("Você inseriu um valor inválido");
+		}
+		return editar;
+	}
+	
+	public void editarTudoUsuario() throws SQLException {
+		String nome = informarNome();
+		String email = informarEmail();
+		String senha = informarSenha();
+		int adm = informarTipo();
+		int id = informarId();
+		
+		String sql = "UPDATE usuarios "
+				+ "SET nome = ?, "
+				+ "email = ?,"
+				+ "senha = ?,"
+				+ "adm = ? "
+				+ "WHERE id_usuario = ?";
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+		
+		stmt.setString(1, nome);
+		stmt.setString(2, email);
+		stmt.setString(3, senha);
+		stmt.setInt(4, adm);
+		stmt.setInt(5, id);
+		stmt.executeUpdate();
+	}
+	public void editarParteUsuario() throws SQLException {
+		String edicao = escolherEdicao();
+		String novaString = "";
+		int novaInt = 0;
+		// Vai definir se a escolha foi uma String ou int
+		boolean mudancaString = false;
+		
+		// O usuário vai definir com o que ele vai atualizar a tabela
+		switch (edicao) {
+		case "nome":
+			novaString = informarNome();
+			mudancaString = true;
+			break;
+		case "email":
+			novaString = informarEmail();
+			mudancaString = true;
+			break;
+		case "senha":
+			novaString = informarSenha();
+			mudancaString = true;
+			break;
+		case "adm":
+			novaInt = informarTipo();
+			mudancaString = false;
+			break;
+		}
+		
+		int id = informarId();
+		
+		// Vai atualizar o usuário na coluna 'edicao' por 'novaString/novaInt' onde o id é igual a 'id'
+		String sql = "UPDATE usuarios "
+				+ "SET " + edicao + " = ? "
+				+ "WHERE id_usuario = ?";
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+
+		if (mudancaString == true) {
+			stmt.setString(1, novaString);
+		} else {
+			stmt.setInt(1, novaInt);
+		}
+		stmt.setInt(2, id);
+		stmt.executeUpdate();
+	}
+	
 	public void apagarUsuario() throws SQLException {
 		
 		int id = informarId();
 		
-		String sql = "DELETE FROM usuarios WHERE id_usuario = (?)";
+		String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
 		PreparedStatement stmt = conexao.prepareStatement(sql);
 		
 		stmt.setInt(1, id);
