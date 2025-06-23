@@ -9,6 +9,7 @@ public class Main {
 		
 		Home home = new Home();
 		home.conectarBanco();
+		home.listarOpcoes();
 		
 	}
 }

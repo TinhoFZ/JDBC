@@ -16,8 +16,6 @@ public class Home {
 		Conexao conexao = new Conexao();
 		// Vai retornar um objeto, que vai ser armazenado em 'conn'
 		conn = conexao.criarConexao();
-		
-		listarOpcoes();
 	}
 	
 	public void listarOpcoes() throws SQLException, ClassNotFoundException {
@@ -30,11 +28,13 @@ public class Home {
 	// Método para retornar a escolha do usuário
 	public int escolha() {
 		int escolha = 0;
+		// O código vai rodar enquanto escolha não for igual a uma das opções
 		try {
 			escolha = input.nextInt();
+			input.nextLine();
 		} catch (InputMismatchException e) {
 			System.out.println("Você inseriu um valor inválido");
-		}
+			}
 		return escolha;
 	}
 	

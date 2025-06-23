@@ -34,7 +34,8 @@ public class UsuarioList {
     	System.out.println("O que deseja fazer? "
     			+ "\n [1] Cadastrar novo usuário"
     			+ "\n [2] Visualizar todos usuários"
-    			+ "\n [3] Voltar");
+    			+ "\n [3] Apagar usuário"
+    			+ "\n [4] Voltar");
 		
 		escolherAcao();
 	}
@@ -53,6 +54,10 @@ public class UsuarioList {
     		listarOpcoes();
     		break;
     	case 3:
+    		usuarioF.apagarUsuario();
+    		listarOpcoes();
+    		break;
+    	case 4:
     		home.conectarBanco();
     		break;
     		default:
@@ -72,7 +77,7 @@ public class UsuarioList {
 		while (resultado.next()) {
 			
 			// Vai armazenar o valor de uma coluna em uma variável
-			int id = resultado.getInt("id");
+			int id = resultado.getInt("id_usuario");
 			String nome = resultado.getString("nome");
 			String email = resultado.getString("email");
 			String senha = resultado.getString("senha");

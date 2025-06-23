@@ -34,14 +34,27 @@ public class UsuarioForm {
     public int informarTipo() {
     	int escolha = 0;
     	try {
-	    	System.out.println("Você é adm? [0] não | [1] sim");
+	    	System.out.println("Você é adm? [1] não | [2] sim");
 	    	escolha = input.nextInt();
+	    	input.nextLine();
 	    	if (escolha > 1 || escolha < 0) {
 	    		System.out.println("Escolha uma das opções");
 	    	}
     	} catch (InputMismatchException e) {
     		System.out.println("Você inseriu um valor inválido");
     	}
+    	return escolha - 1;
+    }
+
+    public int informarId() {
+    	int escolha = 0;
+    	try {
+	    	System.out.println("Qual o id?");
+	    	escolha = input.nextInt();
+	    	input.nextLine();
+	    } catch (InputMismatchException e) {
+	    	System.out.println("Você inseriu um valor inválido");
+	    }
     	return escolha;
     }
     
@@ -62,13 +75,23 @@ public class UsuarioForm {
 		stmt.setString(2, email);
 		stmt.setString(3, senha);
 		stmt.setInt(4, adm);
+		// Vai atualizar o banco após as mudanças feitas
 		stmt.executeUpdate();
 		System.out.println("Usuário adicionado com sucesso!");
 		
 	}
 	
-	public void entrarUsuario() {
+	public void apagarUsuario() throws SQLException {
 		
+		int id = informarId();
+		
+		String sql = "DELETE FROM usuarios WHERE id_usuario = (?)";
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+		
+		stmt.setInt(1, id);
+		stmt.executeUpdate();
+		
+		System.out.println("Usuário apagado com sucesso!");
 	}
 	
 }
