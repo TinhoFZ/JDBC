@@ -26,7 +26,7 @@ public class EmpresaForm {
     }
     
     public String informarRazao() {
-    	System.out.println("Qual a razão social da emrpesa?");
+    	System.out.println("Qual a razão social da empresa?");
     	return input.nextLine();
     }
 
@@ -55,5 +55,15 @@ public class EmpresaForm {
     	stmt.setString(3, razao);
     	stmt.executeUpdate();
     	System.out.println("Empresa adicionada com sucesso!");
+    }
+    
+    public void apagarEmpresa() throws SQLException {
+    	int id = informarId();
+    	
+    	String sql = "DELETE FROM empresas WHERE id_empresa = ?";
+    	PreparedStatement stmt = conexao.prepareStatement(sql);
+    	
+    	stmt.setInt(1, id);
+    	stmt.executeUpdate();
     }
 }

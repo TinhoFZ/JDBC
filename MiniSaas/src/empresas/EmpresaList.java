@@ -34,7 +34,8 @@ public class EmpresaList {
     	System.out.println("O que deseja fazer? "
     			+ "\n [1] Cadastrar nova empresa"
     			+ "\n [2] Visualizar todas empresas"
-    			+ "\n [3] Voltar");
+    			+ "\n [3] Apagar empresa"
+    			+ "\n [4] Voltar");
 		
 		escolherAcao();
 	}
@@ -53,6 +54,9 @@ public class EmpresaList {
     		listarOpcoes();
     		break;
     	case 3:
+    		empresaF.apagarEmpresa();
+    		listarOpcoes();
+    	case 4:
     		home.listarOpcoes();
     		default:
 				System.out.println("Escolha uma das opções");

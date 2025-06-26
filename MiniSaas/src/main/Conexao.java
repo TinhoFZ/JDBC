@@ -9,7 +9,7 @@ public class Conexao  {
 	public Connection criarConexao() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		// Vai criar a conexão com ("nome do banco", "nome do usuário", "senha")
-		Connection conexao=DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc_teste", "root", "senha");
+		Connection conexao=DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc_teste", "root", "123456");
 		System.out.println("Conectado ao banco de dados");
 		return conexao;
 	}
