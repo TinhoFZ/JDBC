@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 import main.Conexao;
 import usuarios.UsuarioList;
+import empresas.EmpresaList;
 
 public class Home {
 
@@ -21,7 +23,8 @@ public class Home {
 	public void listarOpcoes() throws SQLException, ClassNotFoundException {
 		System.out.println("O que deseja fazer?"
 				+ "\n [1] Ir para usuários"
-				+ "\n [2] Sair");
+				+ "\n [2] Ir para empresas"
+				+ "\n [3] Sair");
 		escolherOpcoes();
 	}
 	
@@ -48,6 +51,9 @@ public class Home {
 			usuario.listarOpcoes();
 			break;
 		case 2:
+			EmpresaList empresa = new EmpresaList(conn);
+			empresa.listarOpcoes();
+		case 3:
 			System.exit(0);
 			break;
 			default:

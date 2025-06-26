@@ -70,7 +70,7 @@ public class UsuarioForm {
 		String sql = "INSERT INTO usuarios (nome, email, senha, adm) VALUES (?, ?, ?, ?)";
 		// Está preparando o banco para receber um comando
 		PreparedStatement stmt = conexao.prepareStatement(sql);
-		// Vai preencher o valor '1' com o nome 'joão', vai preecnher o valor '2' com a idade '17'
+		// Vai preencher o valor '1' com a variável 'nome', vai preecnher o valor '2' com a variável 'email' etc
 		stmt.setString(1, nome);
 		stmt.setString(2, email);
 		stmt.setString(3, senha);
